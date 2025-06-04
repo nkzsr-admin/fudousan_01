@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>物件を探す | 沖縄ハウジング</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html { overflow-y: scroll; }
+    .hidden { display: none; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    main { flex: 1; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+<main>
+  <!-- Header -->
+  <header class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4 relative">
+      <a href="fudousann.html"><h1 class="text-xl font-bold tracking-wide">沖縄ハウジング</h1></a>
+      <button id="menu-toggle" class="md:hidden block focus:outline-none absolute right-6 z-50" aria-label="メニューを開く">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <nav id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white/90 backdrop-blur flex flex-col justify-center items-center text-center text-lg md:static md:flex md:flex-row md:bg-transparent md:backdrop-blur-none md:items-center md:justify-center md:text-base">
+        <div class="flex flex-col items-center w-full px-6 md:flex-row md:w-auto md:px-0">
+          <a href="fudousann-search-page.html" class="hover:underline text-lg md:text-base my-3 md:my-0 md:ml-8 md:mr-0">物件</a>
+          <a href="fudousann-news-page.html" class="hover:underline text-lg md:text-base my-3 md:my-0 md:ml-8 md:mr-0">お知らせ</a>
+          <a href="fudousann-company-page.html" class="hover:underline text-lg md:text-base my-3 md:my-0 md:ml-8 md:mr-0">会社案内</a>
+          <a href="fudousann-contact-page.html" class="hover:underline text-lg md:text-base my-3 md:my-0 md:ml-8 md:mr-0">問い合わせ</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- JavaScript：ハンバーガー切り替え -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById('menu-toggle');
+      const menuIconPath = document.getElementById('menu-icon-path');
+      const mobileMenu = document.getElementById('mobile-menu');
+      let isOpen = false;
+
+      menuToggle.addEventListener('click', () => {
+        isOpen = !isOpen;
+        mobileMenu.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden', isOpen);
+        document.body.classList.toggle('h-screen', isOpen);
+
+        if (isOpen) {
+          menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        } else {
+          menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        }
+      });
+    });
+  </script>
+  <div class="h-10"></div>
+
+  <!-- Filter Section -->
+  <section class="bg-gray-100 py-8 px-6">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-4 text-center">エリアで絞り込む</h2>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="filterProperties('那覇')" class="area-button px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">那覇</button>
+        <button onclick="filterProperties('浦添')" class="area-button px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">浦添</button>
+        <button onclick="filterProperties('沖縄市')" class="area-button px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">沖縄市</button>
+        <button onclick="filterProperties('名護')" class="area-button px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">名護</button>
+        <button onclick="filterProperties('all')" class="area-button px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600">全て表示</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Result Section -->
+  <section class="py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-2xl font-semibold mb-8 text-center" id="area-title">検索結果</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="property-list">
+
+        <!-- 藤沢テストハイツ -->
+        <div class="property-card" data-area="那覇">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">藤沢テストハイツ 305号室</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">2,000万 <span class="text-sm font-normal text-gray-600">1LDK / 60㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県那覇市おもろまち1丁目1-1</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>おもろまち駅から徒歩2分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 那覇グリーンビル -->
+        <div class="property-card" data-area="那覇">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">那覇グリーンビル</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">2,100万 <span class="text-sm font-normal text-gray-600">3LDK / 72㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県那覇市△△</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>ゆいレール 安里駅 徒歩5分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 那覇セントラル -->
+        <div class="property-card" data-area="那覇">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">那覇セントラル</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">1,500万 <span class="text-sm font-normal text-gray-600">1LDK / 50㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県那覇市××</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>県庁前駅から徒歩3分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 浦添サンライズ -->
+        <div class="property-card" data-area="浦添">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">浦添サンライズ</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">1,900万 <span class="text-sm font-normal text-gray-600">2DK / 58㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県浦添市◇◇</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>経塚駅から徒歩6分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 沖縄ヒルズ -->
+        <div class="property-card" data-area="沖縄市">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">沖縄ヒルズ</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">2,000万 <span class="text-sm font-normal text-gray-600">3LDK / 68㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県沖縄市××</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>美里入口バス停 徒歩5分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 名護パークハイム -->
+        <div class="property-card" data-area="名護">
+          <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="brian-babb-XbwHrt87mQ0-unsplash.jpg" alt="物件画像" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">名護パークハイム</h3>
+              <p class="text-orange-500 font-bold text-lg mt-1">1,700万 <span class="text-sm font-normal text-gray-600">2LDK / 62㎡</span></p>
+              <div class="mt-2 text-sm text-gray-700">
+                <p class="flex items-center"><span class="mr-1">📍</span>沖縄県名護市◎◎</p>
+                <p class="flex items-center"><span class="mr-1">🚃</span>名護バスターミナル 徒歩8分</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-100 text-gray-700 py-8 border-t text-sm w-full">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <p>Copyright(C) 沖縄ハウジング. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  function filterProperties(area) {
+    const cards = document.querySelectorAll('.property-card');
+    const title = document.getElementById('area-title');
+    cards.forEach(card => {
+      if (area === 'all' || card.dataset.area === area) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    const buttons = document.querySelectorAll('.area-button');
+    buttons.forEach(btn => {
+      btn.classList.remove('ring', 'ring-offset-2', 'ring-orange-500', 'bg-orange-600', 'text-white', 'font-bold');
+      btn.classList.add('bg-orange-500', 'text-white');
+      if (btn.textContent.trim() === area || (area === 'all' && btn.textContent.includes('全て'))) {
+        btn.classList.add('ring', 'ring-offset-2', 'ring-orange-500', 'bg-orange-600', 'text-white', 'font-bold');
+      }
+    });
+
+    title.textContent = area === 'all' ? '全ての物件を表示中' : `${area}の物件を表示中`;
+  }
+</script>
+
+</body>
+</html>
